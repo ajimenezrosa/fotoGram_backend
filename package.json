@@ -1,0 +1,19 @@
+{
+  "name": "08-fotogram-server",
+  "version": "1.0.0",
+  "description": "08-fotogram-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajimenezrosa/fotoGram_backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajimenezrosa/fotoGram_backend/issues"
+  },
+  "homepage": "https://github.com/ajimenezrosa/fotoGram_backend#readme"
+}
