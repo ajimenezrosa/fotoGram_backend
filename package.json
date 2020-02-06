@@ -15,5 +15,14 @@
   "bugs": {
     "url": "https://github.com/ajimenezrosa/fotoGram_backend/issues"
   },
-  "homepage": "https://github.com/ajimenezrosa/fotoGram_backend#readme"
+  "homepage": "https://github.com/ajimenezrosa/fotoGram_backend#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.8",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.1.6",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.8.11"
+  }
 }
