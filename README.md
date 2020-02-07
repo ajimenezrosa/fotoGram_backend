@@ -190,6 +190,22 @@ export const Post = model<Ipost>('Post' , postSchema);
 
 
 # Servicio para obtener los POST
+  ### En mongo al colocar el .sort({ _id: -1}) le Estoy indicando que 
+  ###    ordene el resultado de forma descendente...bundleRenderer.renderToStream
+
+  
+~~~javascript
+  let pagina = Number( req.query.pagina) || 1 ;
+  let skip = pagina-1;
+        skip = skip * 10;
+
+   const posts = await  Post.find()
+                  .sort({ _id: -1})
+                  .skip( skip )
+                  .limit(10)
+                  .populate('usuario', '-password')
+                  .exec();
+~~~                  
 
 # Servicio para subir Archivos
 
