@@ -70,9 +70,35 @@ userRourtes.post('/create', (req, res) => {
 });
 //Actualizar Usuario
 userRourtes.post('/update', autenticacion_1.verificaToken, (req, res) => {
-    res.json({
-        ok: true,
-        usuario: req.usuario
+    const user = {
+        nombre: req.body.nombre || req.usuario.nombre,
+        email: req.body.email || req.usuario.email,
+        avatar: req.body.avatar || req.Usuario.avatar
+    };
+    usuario_model_1.Usuario.findByIdAndUpdate(req.usuario._id, user, { new: true }, (err, userDB) => {
+        if (err)
+            throw err;
+        if (!userDB) {
+            return res.json({
+                ok: false,
+                mensaje: 'No exite un usuario con ese ID'
+            });
+        }
+        //Generar nuevo tokken
+        const tokenUser = token_1.default.getJwtToken({
+            _id: userDB._id,
+            nombre: userDB.nombre,
+            email: userDB.email,
+            avatar: userDB.avatar
+        });
+        res.json({
+            ok: true,
+            token: tokenUser
+        });
     });
+    // res.json({
+    //   ok: true,
+    //   usuario: req.usuario
+    // });
 });
 exports.default = userRourtes;
