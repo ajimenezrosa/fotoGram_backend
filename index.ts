@@ -10,7 +10,7 @@ server.app.use( '/user', userRourtes );
 
 
 //Conectar DB
-mongoose.connect('mongodb://localhost:27017/fotosgrams',
+mongoose.connect('mongodb://localhost:27017/fotosgram',
                { useUnifiedTopology: true, useNewUrlParser: true , useCreateIndex: true}, 
                             (err) => {
                               if ( err ) throw err;

@@ -10,7 +10,7 @@ const server = new server_1.default();
 //Rutas de mi aplicacion
 server.app.use('/user', usuarios_1.default);
 //Conectar DB
-mongoose_1.default.connect('mongodb://localhost:27017/fotosgrams', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }, (err) => {
+mongoose_1.default.connect('mongodb://localhost:27017/fotosgram', { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }, (err) => {
     if (err)
         throw err;
     console.log('Base de datos ONLINE!');
