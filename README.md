@@ -108,6 +108,9 @@ También crearemos un servicio que nos hacía falta para validar el token del us
     import { Schema, Document ,model  } from 'mongoose';
 ~~~
 
+
+Creacion de Post.model , 
+esto es una clase muy importante en nuestra aplicacion
 ~~~javascript
 
 import { Schema, Document ,model  } from 'mongoose';
@@ -158,6 +161,33 @@ export const Post = model<Ipost>('Post' , postSchema);
 
 
 # Servicio para crear un POST
+
+### El servicio debe retornar un json como el que se describe a continuacion.
+
+
+
+~~~json
+{
+    "ok": true,
+    "body": {
+        "img": [],
+        "_id": "5e3db9c043f2b7336c6a43e5",
+        "mensaje": "Hola Mundo",
+        "coords": "14,14",
+        "usuario": {
+            "avatar": "avg6.png",
+            "_id": "5e3daaec8650e477d4d2c9ec",
+            "nombre": "Hector Ortiz",
+            "email": "Hector.ortiz@gmail.com",
+            "password": "$2b$10$ieTqusqLYTxORek5atufFopAKd0vMnidzysDj6Pqu6Q2nXsHm",
+            "__v": 0
+        },
+        "created": "2020-02-07T19:25:52.851Z",
+        "__v": 0
+    }
+}
+~~~
+
 
 # Servicio para obtener los POST
 
