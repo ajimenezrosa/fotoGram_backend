@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const usuario_model_1 = require("../models/usuario.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const token_1 = __importDefault(require("../classes/token"));
 const userRourtes = express_1.Router();
 //Login
 userRourtes.post('/login', (req, res) => {
@@ -20,9 +21,15 @@ userRourtes.post('/login', (req, res) => {
             });
         }
         if (userDB.comprarPassword(body.password)) {
+            const tokenUser = token_1.default.getJwtToken({
+                _id: userDB._id,
+                nombre: userDB.nombre,
+                email: userDB.email,
+                avatar: userDB.avatar
+            });
             res.json({
                 ok: true,
-                token: '#LJA;FLKJASDFLKJASDFFLJKA'
+                token: tokenUser
             });
         }
         else {
@@ -43,9 +50,15 @@ userRourtes.post('/create', (req, res) => {
         avatar: req.body.avatar
     };
     usuario_model_1.Usuario.create(user).then(userDB => {
+        const tokenUser = token_1.default.getJwtToken({
+            _id: userDB._id,
+            nombre: userDB.nombre,
+            email: userDB.email,
+            avatar: userDB.avatar
+        });
         res.json({
             ok: true,
-            user: userDB
+            token: tokenUser
         });
     }).catch(err => {
         res.json({
