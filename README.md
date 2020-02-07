@@ -15,6 +15,17 @@ npm install express body-parser cors mongoose express-fileupload jsonwebtoken bc
 ~~~
 
 
+cololar mode de escucha para que transforme los archivos de TypeScript en Js de forma automatica
+~~~javascript
+  tsc -w
+~~~
+
+para que actualice los cambios estaria pendiente de la carpeta dist/
+
+~~~javascript
+  nodemon dist/
+~~~
+
 # instalacion de MongoDB y Mongoose
 
 ## La base de datos líder para aplicaciones modernas
@@ -66,4 +77,92 @@ npm install
 
 
 En la siguiente sección trabajaremos con la generación de POSTs y subida de imágenes.
+
+
+
+# Temas puntuales
+
+Asignaremos fotografías a documentos de Node, crearemos carpetas por usuarios, ID únicos a las imágenes para evitar duplicados y sobre escribir cualquier información y otras cosas.
+
+También crearemos un servicio que nos hacía falta para validar el token del usuario
+
+# Backend FotoGram POST y Subida de archivos.
+
+# introduccion
+
+# Modelo de base de datos Post.
+  Tendremos toda la informacion que postean los usuarios.
+
+~~~javaScript
+    import { Schema, Document ,model  } from 'mongoose';
+~~~
+
+~~~javascript
+
+import { Schema, Document ,model  } from 'mongoose';
+import { Usuario } from './usuario.model';
+
+
+const postSchema = new Schema({
+
+  created: {
+    type: Date
+  },
+  mensaje: {
+    type: String
+  },
+  img: [{
+    type: String
+  }],
+  coords: {
+    type: String
+  },
+  usuario: {
+    type: Schema.Types.ObjectId,
+    ref: 'Usuario',
+    required: [true , 'Debe de existir una referencia a un usuario']
+  }
+
+});
+
+postSchema.pre<Ipost>('save', function( next ) {
+    this.created = new Date();
+    next();
+});
+
+interface Ipost extends Document {
+  created: Date;
+  mensaje: string;
+  img: string[];
+  coords: string;
+  Usuario: string;
+
+}
+
+
+export const Post = model<Ipost>('Post' , postSchema);
+
+~~~
+
+
+
+# Servicio para crear un POST
+
+# Servicio para obtener los POST
+
+# Servicio para subir Archivos
+
+# Explicacion del proceso que aplicaremos
+
+# Clase para el Manejo del FileSystem
+
+# Generar un nombre unico a la imagen
+
+# Mover el archivo Fisico a la carpeta que hemos creado
+
+# Mover Imagenes del Temp personalizado a la carpeta post
+
+# Servicio para mostrar una imagen por URL
+
+# Retornar Informacion del usuario por Token.
 
