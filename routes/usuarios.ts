@@ -5,6 +5,46 @@ import bcrypt, { hashSync } from 'bcrypt';
 
 const userRourtes = Router();
 
+//Login
+
+userRourtes.post('/login' , (req:Request , res:Response) => {
+
+    const body = req.body;
+
+    Usuario.findOne({ email: body.email}, (err , userDB) => {
+
+        if (err ) throw err;
+
+        if ( !userDB ) {
+          return res.json({
+            ok: false,
+            mensaje:  'usuario / contrasena no son conrrectos'
+          });
+        }
+
+        if (userDB.comprarPassword (body.password)) {
+          res.json({
+            ok: true,
+            token: '#LJA;FLKJASDFLKJASDFFLJKA'
+          });
+        } else {
+          return res.json({
+            ok: false,
+            mensaje:  'usuario / contrasena no son conrrectos ***'
+          });
+        }
+
+    })
+    
+    ////
+ 
+
+
+});
+
+
+
+//Crear un usuario
 userRourtes.post('/create' , (req: Request , res: Response) => {
 
   const  user = {
