@@ -52,5 +52,18 @@ export default class Server {
 }
 ~~~
 
+# Código fuente de la sección
 
+### Código fuente hasta el momento
+Hemos llegado a un punto importante en nuestro backend server en el cual ya se conecta a la base de datos y creamos usuarios con sus respectivos tokens y claves encriptadas
+
+# 
+Recuerden que los módulos de node no van en el archivo comprimido, deben de ejecutar un npm install para reconstruirlos.
+~~~javascript
+npm install
+~~~
+
+
+
+En la siguiente sección trabajaremos con la generación de POSTs y subida de imágenes.
 
