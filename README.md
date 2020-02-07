@@ -64,6 +64,17 @@ npm install
 ~~~
 
 
+### Esta seria la Version 1.0.0 de nuestro BackEnd
+   contiene los siguentes servicios.
+        - Creacion de Usuarios 
+        - Actualizaciones de Usuarios
+        - Login de Usuarios.
+        
+   Ademas tenemos la encriptacion de las claves de acceso 
+        - encriptacion de Claves 
+        - Creacion de Token de seguridad.
+        - validacion de Token en los servicios de /Login/update
+        
 
 En la siguiente sección trabajaremos con la generación de POSTs y subida de imágenes.
 
