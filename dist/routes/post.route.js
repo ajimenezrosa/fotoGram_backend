@@ -8,11 +8,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const autenticacion_1 = require("../middlewares/autenticacion");
 const post_model_1 = require("../models/post.model");
+const file_System_1 = __importDefault(require("../classes/file-System"));
 const postRouts = express_1.Router();
+const fileSyetem = new file_System_1.default();
 //Obtener Post paginados
 postRouts.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     /*En mongo al colocar el .sort({ _id: -1}) le Estoy indicando que
@@ -63,6 +68,7 @@ postRouts.post('/upload', [autenticacion_1.verificaToken], (req, res) => {
             mensaje: 'Lo que se Subio no es una Imagen'
         });
     }
+    fileSyetem.guardarImagenTemporal(file, req.usuario._id);
     res.json({
         ok: false,
         file: file.mimetype

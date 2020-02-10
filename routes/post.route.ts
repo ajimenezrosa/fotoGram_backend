@@ -2,11 +2,12 @@ import { Router, Response } from 'express';
 import { verificaToken } from '../middlewares/autenticacion';
 import { Post } from '../models/post.model';
 import { FileUpload } from '../interfaces/file-upload';
+import FileSystem from '../classes/file-System';
 
 
 
 const postRouts = Router();
-
+const fileSyetem = new FileSystem();
 
 //Obtener Post paginados
 postRouts.get('/', async (req: any, res: Response) => {
@@ -86,6 +87,8 @@ postRouts.post('/upload', [ verificaToken ] , (req: any, res: Response) =>{
       });
     }
 
+
+    fileSyetem.guardarImagenTemporal(file, req.usuario._id);
 
     res.json({
       ok: false,

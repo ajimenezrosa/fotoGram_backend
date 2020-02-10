@@ -239,6 +239,61 @@ server.app.use(fileUpload()) ;
 
 # Clase para el Manejo del FileSystem
 
+En este punto tocamos varias cosas,
+
+importamos el path que nos permite tener acceso a todo el directorio del equipo,
+si ustedes lo desean pueden hacer una prueba con el ***console.log** para determinar 
+la valides de la ejecucion del comanto.
+
+Ademos tenemos que importar Fs que nos permite tener acceso al filesystem.
+
+#### La clase que crearemos a continuacion se describe debajo con la misma podremos crear 
+#### archivos desde nuestro servicio de Nodejs.  
+
+#### Debemos senalar que todas las carpetan tienen como nombre el id de los usuarios.
+#### esto nos garantizara que se repitan las carptas en nuestro servido REST.
+
+
+~~~javascript
+import { FileUpload } from '../interfaces/file-upload';
+import path from 'path';
+import fs from 'fs';
+
+export default class FileSystem {
+
+
+  constructor() {
+
+  }
+
+
+  guardarImagenTemporal(file: FileUpload , userId: string) {
+    const path = this.crearCarpetausuario(userId);
+  }
+
+  private crearCarpetausuario(userid: string) {
+    const pathUser = path.resolve( __dirname , '../uploads/', userid);
+    const pathuserTemp = pathUser + '/temp';
+    console.log(pathUser);
+
+    const existe = fs.existsSync(pathUser);
+
+    if (!existe){
+      fs.mkdirSync(pathUser);
+      fs.mkdirSync(pathuserTemp);
+    }
+
+    return pathuserTemp;
+
+
+
+
+  }
+
+}
+
+~~~
+
 # Generar un nombre unico a la imagen
 
 # Mover el archivo Fisico a la carpeta que hemos creado
