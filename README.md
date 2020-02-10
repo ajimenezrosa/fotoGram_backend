@@ -191,7 +191,7 @@ export const Post = model<Ipost>('Post' , postSchema);
 
 # Servicio para obtener los POST
   ### En mongo al colocar el .sort({ _id: -1}) le Estoy indicando que 
-  ###    ordene el resultado de forma descendente...bundleRenderer.renderToStream
+  ###    ordene el resultado de forma descendente...
 
   
 ~~~javascript
@@ -208,6 +208,32 @@ export const Post = model<Ipost>('Post' , postSchema);
 ~~~                  
 
 # Servicio para subir Archivos
+En esta seccion trabajaremos los procesos de carga de archivos.
+para esto importaremos en nuestro index.ts lo siguiente.
+
+~~~javascript
+import fileUpload from 'express-fileupload';
+~~~
+
+a su vez tambien ejecutarmos el siguiente comando en nuestra consola.
+
+~~~javascript
+npm install @types/express-fileupload --save-dev
+~~~
+
+
+en este caso utilizaremos el fileUpload, esto toma los archivos los carga y los coloca en una seccion especial
+la misma es conocida como FILES.
+
+colocaremos el siguiente codigo justo debajo de la seccion Body parser en el archivo index.ts
+
+Codigo type script para instanciar el fileUpload.
+~~~javascript
+//FileUpload
+server.app.use(fileUpload()) ;
+~~~
+
+
 
 # Explicacion del proceso que aplicaremos
 
