@@ -269,13 +269,13 @@ la valides de la ejecucion del comanto.
 
 Ademos tenemos que importar Fs que nos permite tener acceso al filesystem.
 
-#### La clase que crearemos a continuacion se describe debajo con la misma podremos crear 
+#### A continuacion la clase con la que podremos crear 
 #### archivos desde nuestro servicio de Nodejs.  
 
 #### Debemos senalar que todas las carpetan tienen como nombre el id de los usuarios.
 
 
-#### esto nos garantizara que se repitan las carptas en nuestro servido REST.
+#### esto nos garantizara que no se repitan las carptas en nuestro servido REST.
 
 
 ~~~javascript
