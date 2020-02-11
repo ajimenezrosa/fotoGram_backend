@@ -499,4 +499,37 @@ este servicios retorna un Json con los datos de nuestro usuario.
 tiene una validacion mediante un Token ***verificaToken** el cual funciona como seguridad 
 para evitar que pueden extraer datos de forma no autorizada.
 
-#
+
+
+# 
+
+# Realizamos esta configuración para que nuestro servidor pueda aceptar solicitudes de otras fuentes.
+
+Nuestro Servidor nos presenta un error
+de permisos. 
+
+identificamos que esto es del lado del servicor.
+para solucionarlo instalamos un plugin en el Browser
+GoogleChrome llamado
+
+
+~~~javascript
+import cors from 'cors';
+~~~
+
+~~~javascript
+ import cors from 'cors';
+~~~
+
+Despues de esto hacemos la configuracion del CORS 
+lo cual es sumamente facil.  Anexo el codigo
+
+~~~javascript
+
+//Configurar CORS
+server.app.use( cors( { origin: true , credentials: true} ));
+~~~
+
+Esta Seria toda la configuracion que me hace falta para aceptar peticiones de otros origines.
+
+
