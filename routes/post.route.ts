@@ -69,7 +69,7 @@ postRouts.get('/', async (req: any, res: Response) => {
 
 
 //Servicios para subir Archivos
-postRouts.post('/upload', [ verificaToken ] , (req: any, res: Response) =>{
+postRouts.post('/upload', [ verificaToken ] , async ( req: any, res: Response) =>{
 
     if( !req.files ) {
       return res.status(400).json({
@@ -88,7 +88,7 @@ postRouts.post('/upload', [ verificaToken ] , (req: any, res: Response) =>{
     }
 
 
-    fileSyetem.guardarImagenTemporal(file, req.usuario._id);
+  await  fileSyetem.guardarImagenTemporal(file, req.usuario._id);
 
     res.json({
       ok: false,

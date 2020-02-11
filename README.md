@@ -251,6 +251,8 @@ Ademos tenemos que importar Fs que nos permite tener acceso al filesystem.
 #### archivos desde nuestro servicio de Nodejs.  
 
 #### Debemos senalar que todas las carpetan tienen como nombre el id de los usuarios.
+
+
 #### esto nos garantizara que se repitan las carptas en nuestro servido REST.
 
 
@@ -296,20 +298,22 @@ export default class FileSystem {
 
 # Generar un nombre unico a la imagen
 
-Existe un paquete en javaScript que me permite generar id's uniccos 
+Existe un paquete en javaScript que me permite generar id's unicos 
 ~~~javascript
 npm install uniqid
 ~~~
 ## instalamos los types de la siguiente manera
+~~~javascript
+npm install @types/uniqid
+~~~
+## ¿Cómo generar ID únicos (UUID)?
 
 UUID ***(Universally Unique ID)*** es un estándar ***(parte de ISO/IEC 11578:1996)*** para crear identificadores únicos universales para identificar objetos en un sistema.
 
 El __UUID__ tiene un longitud de 128 bit (16 bytes) y aunque no garantiza la unicidad, la probabilidad de colisiones es reducida debido al número de bits y a la forma en que éstos son generados.
 
 Los algoritmos de creación de UUID están especificados en RFC4122. Un ejemplo de UUID sería el siguiente:
-~~~javascript
-npm install @types/uniqid
-~~~
+
 #### Creamos un proceso que nos genere un id unico.
 #### en mi caso lo hicimos de la siguiente manera.
 

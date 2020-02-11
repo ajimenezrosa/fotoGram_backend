@@ -10,12 +10,21 @@ class FileSystem {
     constructor() {
     }
     guardarImagenTemporal(file, userId) {
-        //Creacion carpetas
-        const path = this.crearCarpetausuario(userId);
-        //nombre archivo
-        const nombreArchivo = this.generarNombreUnico(file.name);
-        console.log(file.name);
-        console.log(nombreArchivo);
+        return new Promise((resolve, reject) => {
+            //Creacion carpetas
+            const path = this.crearCarpetausuario(userId);
+            //nombre archivo
+            const nombreArchivo = this.generarNombreUnico(file.name);
+            //Mover el archivo del Temp a nuestra carpeta temp
+            file.mv(`${path}/${nombreArchivo}`, (err) => {
+                if (err) {
+                    reject(err);
+                }
+                else {
+                    resolve();
+                }
+            });
+        });
     }
     generarNombreUnico(nombreOriginal) {
         // images.jpg

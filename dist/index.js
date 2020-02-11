@@ -14,7 +14,7 @@ const server = new server_1.default();
 server.app.use(body_parser_1.default.urlencoded({ extended: true }));
 server.app.use(body_parser_1.default.json());
 //FileUpload
-server.app.use(express_fileupload_1.default());
+server.app.use(express_fileupload_1.default({ useTempFiles: true }));
 //Rutas de mi aplicacion
 server.app.use('/user', usuarios_1.default);
 server.app.use('/post', post_route_1.default);

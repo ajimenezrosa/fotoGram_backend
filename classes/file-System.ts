@@ -13,13 +13,26 @@ export default class FileSystem {
 
   guardarImagenTemporal(file: FileUpload , userId: string) {
 
-    //Creacion carpetas
-    const path = this.crearCarpetausuario(userId);
+    return new Promise( (resolve, reject) =>{
 
-    //nombre archivo
-    const nombreArchivo = this.generarNombreUnico( file.name);
-    console.log(file.name);
-    console.log(nombreArchivo);
+
+    //Creacion carpetas
+        const path = this.crearCarpetausuario(userId);
+
+        //nombre archivo
+        const nombreArchivo = this.generarNombreUnico( file.name);
+
+        //Mover el archivo del Temp a nuestra carpeta temp
+        file.mv( `${path}/${nombreArchivo}`, (err: any) => {
+            if ( err ){
+              reject(err);
+            } else {
+              resolve();
+            }
+        });
+
+    });
+
 
   }
 
