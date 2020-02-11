@@ -230,6 +230,9 @@ export const Post = model<Ipost>('Post' , postSchema);
 En esta seccion trabajaremos los procesos de carga de archivos.
 para esto importaremos en nuestro index.ts lo siguiente.
 
+![SubirARchivos](https://www.mercadonegro.pe/wp-content/uploads/2019/10/redes-sociales-mundiales.jpg)
+
+
 ~~~javascript
 import fileUpload from 'express-fileupload';
 ~~~
