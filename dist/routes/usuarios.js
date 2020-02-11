@@ -101,4 +101,11 @@ userRourtes.post('/update', autenticacion_1.verificaToken, (req, res) => {
     //   usuario: req.usuario
     // });
 });
+userRourtes.get('/', [autenticacion_1.verificaToken], (req, res) => {
+    const usuario = req.usuario;
+    res.json({
+        ok: true,
+        usuario
+    });
+});
 exports.default = userRourtes;
