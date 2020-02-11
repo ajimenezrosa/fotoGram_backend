@@ -48,6 +48,13 @@ postRouts.get('/', async (req: any, res: Response) => {
       const body = req.body;
       body.usuario = req.usuario._id;
 
+      
+
+
+      const imagenes = fileSyetem.imagenesDeTempHaciaPost(body.usuario);
+      console.log(imagenes);
+      body.imgs = imagenes;
+
         Post.create( body ).then( async postDB =>{
 
         await  postDB.populate('usuario','-password').execPopulate();
@@ -95,7 +102,26 @@ postRouts.post('/upload', [ verificaToken ] , async ( req: any, res: Response) =
       file: file.mimetype
     });
 
-})
+});
+
+
+
+
+//cuando identificamos en el servicio de esta forma /:userid/:img
+//lo toma de forma obligatoria es decir si no recibe esto no funciona el servicio.
+postRouts.get('/imagen/:userid/:img', (req: any, res:Response)=> {
+
+    const userId = req.params.userid;
+    const img = req.params.img;
+
+    const pathFoto = fileSyetem.getFotoUrl(userId, img);
+
+      res.sendFile(pathFoto);
+  // res.json({
+  //   userId, img
+  // });
+
+});
 
 
 export default postRouts

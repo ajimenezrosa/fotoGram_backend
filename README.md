@@ -338,9 +338,120 @@ Los algoritmos de creación de UUID están especificados en RFC4122. Un ejemplo 
 
 # Mover el archivo Fisico a la carpeta que hemos creado
 
+
+### ¿Cómo muevo archivos en node.js?
+
+¿Cómo puedo mover archivos (como mv shell de comando) en node.js? ¿Hay algún método para eso o debo leer un archivo, escribir en un archivo nuevo y eliminar un archivo más antiguo?
+
+~~~javascript
+  private crearCarpetausuario(userid: string) {
+    const pathUser = path.resolve( __dirname , '../uploads/', userid);
+    const pathuserTemp = pathUser + '/temp';
+    // console.log(pathUser);
+
+    const existe = fs.existsSync(pathUser);
+
+    if (!existe){
+      fs.mkdirSync(pathUser);
+      fs.mkdirSync(pathuserTemp);
+    }
+
+    return pathuserTemp;
+  }
+~~~
+
+
+
+
 # Mover Imagenes del Temp personalizado a la carpeta post
 
+### Moveremos las imagenes de la carpeta tempral a la carpeta posts
+### Guardaremos en MongoDb estas imagenes 
+
+
+
+A continuacion el codigo para realizar el movimiemto de las fotos
+desde la carpte temp hasta la carpeta posts.
+
+~~~javascript
+ imagenesDeTempHaciaPost(userId: string ) {
+    const pathTemp = path.resolve( __dirname , '../uploads/', userId, 'temp');
+    const pathPost = path.resolve( __dirname , '../uploads/', userId, 'posts');
+
+    if (!fs.existsSync( pathTemp )) {
+      return [];
+    }
+
+    if (!fs.existsSync( pathPost )) {
+      fs.mkdirSync(pathPost);
+    }
+
+
+    const imagenesTemp = this.obtenerImagnesEnTemp( userId);
+
+    imagenesTemp.forEach(imagen => {
+      fs.renameSync(`${pathTemp}/${imagen}` ,`${pathPost}/${imagen}`);
+    });
+
+    return imagenesTemp;
+
+  }
+~~~
+
+
+
+
 # Servicio para mostrar una imagen por URL
+### Como subir una imagen a nuestro servidor con Node.js y Express
+
+
+En días anteriores hemos visto como trabajar con Node.js y Express, hoy os vamos a explicar ***como subir una imagen a nuestro servidor con Node.js.*** 
+Para ello nos vamos a basar en el proyecto que ya creamos para explicaros como validar un formulario en Node.js.Lo primero de todo que vamos a hacer es crear en nuestra directorio /routes el fichero upload.js dentro de él vamos a crear dos funciones.La primera se va a encargar de cargar el formulario en el que vamos a insertar la imagen 
+__(fichero upload.jade que veremos mas adelante)__
+
+
+
+~~~javascript
+//cuando identificamos en el servicio de esta forma /:userid/:img
+//lo toma de forma obligatoria es decir si no recibe esto no funciona el servicio.
+postRouts.get('/imagen/:userid/:img', (req: any, res:Response)=> {
+
+    const userId = req.params.userid;
+    const img = req.params.img;
+
+    const pathFoto = fileSyetem.getFotoUrl(userId, img);
+
+      res.sendFile(pathFoto);
+  // res.json({
+  //   userId, img
+  // });
+
+});
+~~~
+
+
+En la Clase FilesSystem creamos este metodo 
+el mismo nos retorna la ruta de la imagen que deseamos extraer..
+
+~~~javascript
+  getFotoUrl(userId: string, img: string ){
+
+      //path POSTS
+      const pathFoto = path.resolve( __dirname , '../uploads/', userId, 'posts' , img);
+      //Si la imagen existe
+      const existe = fs.existsSync(pathFoto); 
+
+      if (!existe) {
+        return path.resolve( __dirname, '../assets/400x250.jpg');
+      }
+
+      return pathFoto;
+
+  }
+~~~
+
+
+
 
 # Retornar Informacion del usuario por Token.
 

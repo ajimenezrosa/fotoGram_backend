@@ -43,6 +43,9 @@ postRouts.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 postRouts.post('/', [autenticacion_1.verificaToken], (req, res) => {
     const body = req.body;
     body.usuario = req.usuario._id;
+    const imagenes = fileSyetem.imagenesDeTempHaciaPost(body.usuario);
+    console.log(imagenes);
+    body.imgs = imagenes;
     post_model_1.Post.create(body).then((postDB) => __awaiter(void 0, void 0, void 0, function* () {
         yield postDB.populate('usuario', '-password').execPopulate();
         res.json({
@@ -74,4 +77,15 @@ postRouts.post('/upload', [autenticacion_1.verificaToken], (req, res) => __await
         file: file.mimetype
     });
 }));
+//cuando identificamos en el servicio de esta forma /:userid/:img
+//lo toma de forma obligatoria es decir si no recibe esto no funciona el servicio.
+postRouts.get('/imagen/:userid/:img', (req, res) => {
+    const userId = req.params.userid;
+    const img = req.params.img;
+    const pathFoto = fileSyetem.getFotoUrl(userId, img);
+    res.sendFile(pathFoto);
+    // res.json({
+    //   userId, img
+    // });
+});
 exports.default = postRouts;

@@ -67,6 +67,54 @@ export default class FileSystem {
 
   }
 
+  imagenesDeTempHaciaPost(userId: string ) {
+    const pathTemp = path.resolve( __dirname , '../uploads/', userId, 'temp');
+    const pathPost = path.resolve( __dirname , '../uploads/', userId, 'posts');
+
+    if (!fs.existsSync( pathTemp )) {
+      return [];
+    }
+
+    if (!fs.existsSync( pathPost )) {
+      fs.mkdirSync(pathPost);
+    }
+
+
+    const imagenesTemp = this.obtenerImagnesEnTemp( userId);
+
+    imagenesTemp.forEach(imagen => {
+      fs.renameSync(`${pathTemp}/${imagen}` ,`${pathPost}/${imagen}`);
+    });
+
+    return imagenesTemp;
+
+  }
+
+  private obtenerImagnesEnTemp(userId: string ){ 
+    const pathTemp = path.resolve( __dirname , '../uploads/', userId, 'Temp');
+
+    return fs.readdirSync(pathTemp) || [];
+
+  }
+
+
+  getFotoUrl(userId: string, img: string ){
+
+      //path POSTS
+      const pathFoto = path.resolve( __dirname , '../uploads/', userId, 'posts' , img);
+      //Si la imagen existe
+      const existe = fs.existsSync(pathFoto); 
+
+      if (!existe) {
+        return path.resolve( __dirname, '../assets/400x250.jpg');
+      }
+
+      return pathFoto;
+
+  }
+
+  
+
 }
 
 
