@@ -296,6 +296,42 @@ export default class FileSystem {
 
 # Generar un nombre unico a la imagen
 
+Existe un paquete en javaScript que me permite generar id's uniccos 
+~~~javascript
+npm install uniqid
+~~~
+## instalamos los types de la siguiente manera
+
+UUID ***(Universally Unique ID)*** es un estándar ***(parte de ISO/IEC 11578:1996)*** para crear identificadores únicos universales para identificar objetos en un sistema.
+
+El __UUID__ tiene un longitud de 128 bit (16 bytes) y aunque no garantiza la unicidad, la probabilidad de colisiones es reducida debido al número de bits y a la forma en que éstos son generados.
+
+Los algoritmos de creación de UUID están especificados en RFC4122. Un ejemplo de UUID sería el siguiente:
+~~~javascript
+npm install @types/uniqid
+~~~
+#### Creamos un proceso que nos genere un id unico.
+#### en mi caso lo hicimos de la siguiente manera.
+
+~~~javascript
+  private generarNombreUnico(nombreOriginal: string){ //
+        // images.jpg
+        const nombreArr = nombreOriginal.split('.');
+        const extension = nombreArr[nombreArr.length - 1];
+
+      const idUnico = uniqid();
+
+      return `${idUnico}.${extension}`;
+
+  }
+~~~
+
+#### Ya solo nos queda llamar este proceso para que nos genere el nombre unico del archivo.
+#### 
+~~~javascript
+ const nombreArchivo = this.generarNombreUnico( file.name);
+~~~
+
 # Mover el archivo Fisico a la carpeta que hemos creado
 
 # Mover Imagenes del Temp personalizado a la carpeta post
